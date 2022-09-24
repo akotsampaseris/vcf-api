@@ -1,0 +1,9 @@
+# ignore virtualenv dir
+virtualenv
+
+# ignore assignment dir
+assignment
+
+# ignore project files
+*.sqlite3
+*/__pycache__
