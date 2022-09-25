@@ -7,3 +7,6 @@ assignment
 # ignore project files
 *.sqlite3
 */__pycache__
+
+# ignore vcf files
+*/*.vcf
