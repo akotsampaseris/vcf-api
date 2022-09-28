@@ -3,7 +3,7 @@ import io
 import pandas as pd
 from dotenv import load_dotenv
 
-from django.http import Http404
+from rest_framework import exceptions
 
 load_dotenv()
 
@@ -17,6 +17,9 @@ class VcfDataService:
     def read_vcf_file(cls) -> pd.DataFrame:
         headers = []
         rows = []
+
+        if not os.path.exists(cls.working_vcf_file):
+            raise exceptions.NotFound('File not found.')
 
         with open(cls.working_vcf_file, 'r') as vcf:
             for line in vcf:

@@ -6,7 +6,6 @@ VCF Manipulator is an online REST API that allows the easier editing of Variant 
 
 Installation documentation
 
----
 
 ## API
 
@@ -155,13 +154,11 @@ $ curl DELETE http://localhost:8000/api/data/row?id=rs1000 \
 "Rows  deleted successfully."
 ```
 
----
 
 ## Testing
 
 Testing documentation
 
----
 
 ## Contributing
 
@@ -169,7 +166,6 @@ Pull requests are welcome. For major changes, please open an issue first to disc
 
 Please make sure to update tests as appropriate.
 
----
 
 ## License
 
