@@ -4,7 +4,22 @@ VCF Manipulator is an online REST API that allows the easier editing of Variant 
 
 ## Installation
 
-Installation documentation
+Installation is fairly straightforward and can be completed in a few steps.
+
+Steps:
+
+0. Optional steps before installation
+    * Create a local directory for the project files
+    * Inside this directory create a virtual environment using `virtualenv virtualenv`.
+    * Activate your virtual environment using `source ./virtualenv/bin/activate`.
+1. Clone this repo on your local working environment.
+2. Install required packages with `pip install -r requirements.txt`.
+3. Run migrations using `python manage.py migrate`.
+4. Copy `.env.example` to `.env`.
+5. Make sure to change the values of the environment variables, especially the value of the working VCF file.
+6. Run `python manage.py runserver` to start the application
+7. You can access the API on http://localhost:8000/api. Use the documentation below to work with your VCF file.
+
 
 
 ## API
@@ -148,12 +163,6 @@ $ curl DELETE http://localhost:8000/api/data/row?id=rs1000 \
   -H 'Connection: keep-alive' \
   -H 'Content-Type: application/json' 
 ```
-*Example Response*
-
-```bash
-"Rows  deleted successfully."
-```
-
 
 ## Testing
 
