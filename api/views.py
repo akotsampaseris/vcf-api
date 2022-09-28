@@ -29,8 +29,10 @@ class VcfDataList(APIView, PageNumberPagination):
         self.page_size = custom_page_size \
             if custom_page_size else self.page_size
         
-        if id and not re.fullmatch(re.compile(r"[A-Za-z0-9]+"), id):
-            error_msg = "ID value must be alphanumeric"
+        if id and \
+            not re.fullmatch(re.compile(r"[A-Za-z0-9]+"), id):
+            error_msg = \
+                "URL request parameter 'id' must be alphanumeric"
             return Response(error_msg, 
                 status=status.HTTP_400_BAD_REQUEST
             )
@@ -55,7 +57,10 @@ class VcfDataRow(APIView):
         serializer = VcfDataSerializer(data=data)
 
         if serializer.is_valid():
-            VcfDataService.create_vcf_data_row(serializer.data)
+            VcfDataService.create_vcf_data_row(
+                serializer.data
+            )
+
             return Response(serializer.data, 
                 status=status.HTTP_201_CREATED
             )
@@ -70,16 +75,29 @@ class VcfDataRow(APIView):
         data = JSONParser().parse(request)
         serializer = VcfDataSerializer(data=data)
 
-        if id and not re.fullmatch(re.compile(r"[A-Za-z0-9]+"), id):
-            error_msg = "ID value must be alphanumeric"
+        if not id:
+            error_msg = \
+                "URL request parameter 'id' is required"
+
+            return Response(error_msg, 
+                status=status.HTTP_400_BAD_REQUEST
+            )
+        elif id and \
+            not re.fullmatch(re.compile(r"[A-Za-z0-9]+"), id):
+            error_msg = \
+                "URL request parameter 'id' must be alphanumeric"
+
             return Response(error_msg, 
                 status=status.HTTP_400_BAD_REQUEST
             )
         else:
             if serializer.is_valid():
-                VcfDataService.update_vcf_data_row(id, serializer.data)
+                VcfDataService.update_vcf_data_row(
+                    id, serializer.data
+                )
+
                 return Response(serializer.data, 
-                    status=status.HTTP_201_CREATED
+                    status=status.HTTP_200_OK
                 )
             else:
                 return Response(serializer.errors, 
@@ -90,14 +108,25 @@ class VcfDataRow(APIView):
     def delete(self, request, format=None):
         id = self.request.query_params.get('id')    
 
-        if id and not re.fullmatch(re.compile(r"[A-Za-z0-9]+"), id):
-            error_msg = "ID value must be alphanumeric"
+        if not id:
+            error_msg = \
+                "URL request parameter 'id' is required"
+
+            return Response(error_msg, 
+                status=status.HTTP_400_BAD_REQUEST
+            )
+        elif id and \
+            not re.fullmatch(re.compile(r"[A-Za-z0-9]+"), id):
+            error_msg = \
+                "URL request parameter 'id' must be alphanumeric"
+
             return Response(error_msg, 
                 status=status.HTTP_400_BAD_REQUEST
             )
         else:
             VcfDataService.delete_vcf_data_row(id)
-            return Response('Rows deleted successfully.', 
+            
+            return Response(
                 status=status.HTTP_204_NO_CONTENT
             )
     
