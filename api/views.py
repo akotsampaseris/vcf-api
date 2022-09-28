@@ -10,20 +10,24 @@ from rest_framework_xml.renderers import XMLRenderer
 
 from api.serializers import VcfDataSerializer
 from api.services import VcfDataService
-
-
-class CustomXMLRenderer(XMLRenderer):
-    root_tag_name = 'data'
-    item_tag_name = 'row'
+from api.authentications import SecretKeyAuthentication
 
 
 # Create your views here.
 class VcfDataList(APIView, PageNumberPagination):
     parser_classes = [JSONParser]
-    renderer_classes = [JSONRenderer, CustomXMLRenderer]
+    renderer_classes = [JSONRenderer, XMLRenderer]
+    page_size = 100
+    page_size_query_param = 'page_size'
 
     def get(self, request, format=None):
-        id = self.request.query_params.get('id')    
+        id = self.request.query_params.get('id')
+        
+        custom_page_size = \
+            self.request.query_params.get('page_size')
+        
+        self.page_size = custom_page_size \
+            if custom_page_size else self.page_size
         
         if id and not re.fullmatch(re.compile(r"[A-Za-z0-9]+"), id):
             error_msg = "ID value must be alphanumeric"
@@ -43,7 +47,8 @@ class VcfDataList(APIView, PageNumberPagination):
 
 class VcfDataRow(APIView):
     parser_classes = [JSONParser]
-    renderer_classes = [JSONRenderer, CustomXMLRenderer]
+    renderer_classes = [JSONRenderer, XMLRenderer]
+    authentication_classes = [SecretKeyAuthentication]
 
     def post(self, request, format=None):
         data = JSONParser().parse(request)

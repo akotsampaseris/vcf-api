@@ -39,16 +39,6 @@ INSTALLED_APPS = [
     'api.apps.ApiConfig',
 ]
 
-
-REST_FRAMEWORK = {
-    'DEFAULT_PAGINATION_CLASS': [
-        'rest_framework.pagination.PageNumberPagination',
-        ],
-    'PAGE_SIZE': 100,
-    
-}
-
-
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -62,7 +52,7 @@ MIDDLEWARE = [
 ]
 
 CORS_ORIGIN_ALLOW_ALL = True
-
+CORS_ALLOWED_ORIGINS = []
 
 ROOT_URLCONF = 'vcf_api.urls'
 
