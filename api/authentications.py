@@ -1,13 +1,10 @@
-from asyncio import exceptions
 import os
 from dotenv import load_dotenv
 
 from rest_framework import authentication, exceptions
-from rest_framework.response import Response
-from rest_framework import status
-
 
 load_dotenv()
+
 
 class SecretKeyAuthentication(authentication.BaseAuthentication):
     def authenticate(self, request):

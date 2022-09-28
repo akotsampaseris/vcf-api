@@ -1,13 +1,12 @@
 import os
 import io
 import pandas as pd
-
 from dotenv import load_dotenv
 
 from django.http import Http404
 
-
 load_dotenv()
+
 
 class VcfDataService:
     vcf_dir_path = os.environ.get('VCF_DIR')

@@ -54,7 +54,7 @@ MIDDLEWARE = [
 CORS_ORIGIN_ALLOW_ALL = True
 CORS_ALLOWED_ORIGINS = []
 
-ROOT_URLCONF = 'vcf_api.urls'
+ROOT_URLCONF = 'vcf_manipulator.urls'
 
 TEMPLATES = [
     {
@@ -72,7 +72,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'vcf_api.wsgi.application'
+WSGI_APPLICATION = 'vcf_manipulator.wsgi.application'
 
 
 # Database

@@ -1,5 +1,7 @@
-from rest_framework import serializers
 import re
+
+from rest_framework import serializers
+
 
 class VcfDataSerializer(serializers.Serializer):
     ID = serializers.CharField(min_length=3, max_length=55)
