@@ -2,19 +2,21 @@ import os
 import io
 import pandas as pd
 from dotenv import load_dotenv
+from typing import Tuple
 
 from rest_framework import exceptions
+from django.http import Http404
 
 load_dotenv()
 
 
 class VcfDataService:
     vcf_dir_path = os.environ.get('VCF_DIR')
-    vcf_filename = os.environ.get('VCF_FILENAME')
+    vcf_filename = os.environ.get('VCF_FILE')
     working_vcf_file = '/'.join([vcf_dir_path, vcf_filename])
 
     @classmethod
-    def read_vcf_file(cls) -> pd.DataFrame:
+    def read_vcf_file(cls) -> Tuple[list, pd.DataFrame]:
         headers = []
         rows = []
 
@@ -45,7 +47,7 @@ class VcfDataService:
 
     @classmethod
     def write_data_to_file(cls, 
-        headers: list[str], data: pd.DataFrame
+        headers: list, data: pd.DataFrame
     ) -> None:
         f = open(cls.working_vcf_file, 'w')
         f.write(''.join(headers))
@@ -61,7 +63,7 @@ class VcfDataService:
 
 
     @classmethod
-    def get_vcf_data(cls, id = None):
+    def get_vcf_data(cls, id = None) -> list[dict]:
         headers, data = cls.read_vcf_file()
         
         data = data.loc[data['ID']==id] if id else data

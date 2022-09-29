@@ -8,7 +8,7 @@ Installation is fairly straightforward and can be completed in a few steps.
 
 Steps:
 
-0. Optional steps before installation
+0. (Optional)
     * Create a local directory for the project files
     * Inside this directory create a virtual environment using `virtualenv virtualenv`.
     * Activate your virtual environment using `source ./virtualenv/bin/activate`.
@@ -166,8 +166,15 @@ $ curl DELETE http://localhost:8000/api/data/row?id=rs1000 \
 
 ## Testing
 
-Testing documentation
-
+Testing is being handled with *pytest*. All tests are stored in the *tests* directory and split among files per each Python class, eg `tests/test_services/test_some_service.py`.
+To run all tests in the test suite, you can simply run 
+```bash
+$ pytest -q tests
+```
+in the root directory, or you can run each test class on its own, ie
+```bash
+$ pytest -q tests/test_services/test_some_service.py
+```
 
 ## Contributing
 
