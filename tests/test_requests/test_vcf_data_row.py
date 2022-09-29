@@ -77,7 +77,8 @@ class TestVcfDataRow:
         
         
         headers = {
-            'Authorization': 'somesecretkey'
+            'Authorization': 
+                os.environ.get('AUTH_SECRET_KEY')
         }
 
         response = requests.put(
